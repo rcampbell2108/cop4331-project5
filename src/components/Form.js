@@ -20,7 +20,7 @@ const Form = ({makeAppointment}) => {
     const [error, updateError] = useState(false)
 
     // to read the content and put it in the state
-    const updateState = e  =>{ 
+    const updateState = e  => { 
         updatedAppointment({
             ...appointment,
             [e.target.name] : e.target.value,
@@ -68,6 +68,7 @@ const Form = ({makeAppointment}) => {
     <Fragment>
       <h1> Appointment Request </h1>
       {
+        //  Every field on the form is mandatory. If a field is empty, display an error
         error ? <p className="error-alert"> Please fill the complete form </p>: false
       } 
       <form  
@@ -144,9 +145,6 @@ const Form = ({makeAppointment}) => {
         <button type="submit" className="u-full-width button-primary" /*onclick={captureDate()}*/>
           Request appointment
         </button>
-
-        
-
       </form>
     </Fragment>
   );

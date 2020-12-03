@@ -1,14 +1,19 @@
-import React from "react";
+import React, {Fragment, useState} from "react";
 import PropTypes from 'prop-types';
 
 
 const booked_dates = [];
+//const error
 
 // this class represents the created appointment(s)
 const Appointment = ({ appointment, deletedAppointment }) => (
 
-  <div className="appointment">
 
+
+  <div className="appointment">
+  <Fragment>
+<p className="error-alert"> Please fill the complete form </p>
+</Fragment>
     <p>
       Name: <span>{appointment.name}</span>
     </p>
@@ -70,11 +75,18 @@ Appointment.propTypes =
 
 function CaptureData(appointment) 
 {
+    //  base case: if the new date's in the array, 
+    
+    
+    //display error
 
+
+    //  if the new date's in the array already don't add a duplicate.
     if (!isInArray(booked_dates, appointment))
     {
         booked_dates.push(appointment.date);
     }
+    
 
     //booked_dates.length = date_count
     return (console.log(booked_dates));
