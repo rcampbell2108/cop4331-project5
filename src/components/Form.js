@@ -2,7 +2,17 @@ import React, { Fragment, useState } from "react";
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
 
+
+
 const Form = ({makeAppointment}) => {
+    
+    /*let booked_appointments = JSON.parse(localStorage.getItem('date'));
+    if (!booked_appointments)
+    {
+        booked_appointments = [];
+    }*/
+
+    var booked_appointments = [];
 
     const[appointment, updatedAppointment] = useState ({
         reason:'',
@@ -20,7 +30,7 @@ const Form = ({makeAppointment}) => {
     const updateState = e  =>{ 
         updatedAppointment({
             ...appointment,
-            [e.target.name] : e.target.value
+            [e.target.name] : e.target.value,
         })
     }
 
@@ -28,7 +38,8 @@ const Form = ({makeAppointment}) => {
     const {reason, name, date, time, notes, phone_number, email} = appointment;
 
     // when sending/submitting Form
-    const submitAppointment = e => {
+    const submitAppointment = e => 
+    {
       e.preventDefault();
  
       // Validate
@@ -51,7 +62,7 @@ const Form = ({makeAppointment}) => {
       updatedAppointment({
         reason:'',
         name:'',
-        date:'',
+        date:''     /* need to capture date for the lifecycle of the web app, ie globally.  https://fb.me/react-controlled-components */
         time:'',
         notes:'',
         phone_number:'',
@@ -59,10 +70,18 @@ const Form = ({makeAppointment}) => {
       })
     }
 
+  function captureDate()
+  {
+    booked_appointments.push(date);
+    console.log(booked_appointments);
+  }
+  
   return (
     <Fragment>
       <h1> Appointment Request </h1>
-      {error ? <p className="error-alert"> Please fill the complete form </p>: false} 
+      {
+        error ? <p className="error-alert"> Please fill the complete form </p>: false
+      } 
       <form  
       onSubmit={submitAppointment}
       >
@@ -133,11 +152,16 @@ const Form = ({makeAppointment}) => {
           placeholder="Please provide any additional notes."
           value={notes}
         ></textarea>
-        <button type="submit" className="u-full-width button-primary">
+
+        <button type="submit" className="u-full-width button-primary" onclick={captureDate()}>
           Request appointment
         </button>
 
+        
+
       </form>
+
+
     </Fragment>
   );
 };

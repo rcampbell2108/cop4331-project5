@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 // this class represents the created appointment(s)
-//  
 const Appointment = ({ appointment, deletedAppointment }) => (
   <div className="appointment">
     <p>
