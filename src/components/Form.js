@@ -5,15 +5,8 @@ import PropTypes from 'prop-types';
 
 
 const Form = ({makeAppointment}) => {
-    
-    /*let booked_appointments = JSON.parse(localStorage.getItem('date'));
-    if (!booked_appointments)
-    {
-        booked_appointments = [];
-    }*/
 
-    var booked_appointments = [];
-
+    //var booked_dates = [];
     const[appointment, updatedAppointment] = useState ({
         reason:'',
         name:'',
@@ -62,7 +55,7 @@ const Form = ({makeAppointment}) => {
       updatedAppointment({
         reason:'',
         name:'',
-        date:''     /* need to capture date for the lifecycle of the web app, ie globally.  https://fb.me/react-controlled-components */
+        date:'',     /* need to capture date for the lifecycle of the web app, ie globally.  https://fb.me/react-controlled-components */
         time:'',
         notes:'',
         phone_number:'',
@@ -70,12 +63,7 @@ const Form = ({makeAppointment}) => {
       })
     }
 
-  function captureDate()
-  {
-    booked_appointments.push(date);
-    console.log(booked_appointments);
-  }
-  
+
   return (
     <Fragment>
       <h1> Appointment Request </h1>
@@ -83,7 +71,7 @@ const Form = ({makeAppointment}) => {
         error ? <p className="error-alert"> Please fill the complete form </p>: false
       } 
       <form  
-      onSubmit={submitAppointment}
+      onSubmit={submitAppointment/*, booked_dates.push(date), console.log(booked_dates)*/}
       >
 
         <label> Name </label>
@@ -153,17 +141,16 @@ const Form = ({makeAppointment}) => {
           value={notes}
         ></textarea>
 
-        <button type="submit" className="u-full-width button-primary" onclick={captureDate()}>
+        <button type="submit" className="u-full-width button-primary" /*onclick={captureDate()}*/>
           Request appointment
         </button>
 
         
 
       </form>
-
-
     </Fragment>
   );
+
 };
 
 Form.propTypes = 
