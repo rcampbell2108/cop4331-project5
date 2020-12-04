@@ -2,8 +2,6 @@ import React, { Fragment, useState } from "react";
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
 
-
-
 const Form = ({makeAppointment}) => {
 
     //var booked_dates = [];
@@ -35,7 +33,7 @@ const Form = ({makeAppointment}) => {
     {
       e.preventDefault();
  
-      // Validate
+      // If any of the fields are empty, set error to true
       if(reason.trim() === '' || name.trim() === ''  || date.trim() === ''  || time.trim() === ''  || notes.trim() === ''
           || phone_number.trim() === '' || email.trim() === '' )
       {
@@ -111,6 +109,9 @@ const Form = ({makeAppointment}) => {
           className="u-full-width"
           onChange={updateState}
           value={time}
+          min="09:00" 
+          max="17:00" 
+          required
         />
 
         <label> Phone Number </label>

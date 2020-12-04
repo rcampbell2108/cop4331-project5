@@ -4,16 +4,24 @@ import PropTypes from 'prop-types';
 
 const booked_dates = [];
 //const error
+    var error = false;
+    const updateError = false;
+
 
 // this class represents the created appointment(s)
 const Appointment = ({ appointment, deletedAppointment }) => (
-
+    
 
 
   <div className="appointment">
+
   <Fragment>
-<p className="error-alert"> Please fill the complete form </p>
-</Fragment>
+    <h3> !ERROR GOES HERE! </h3>
+    {
+        error ? <p className="error-alert"> Requested appointment unavailable. Please select a different date. </p>: false
+    }
+  </Fragment>
+
     <p>
       Name: <span>{appointment.name}</span>
     </p>
@@ -75,16 +83,25 @@ Appointment.propTypes =
 
 function CaptureData(appointment) 
 {
+    
+/*<Fragment>
+     <p className="error-alert"> Requested appointment unavailable. Please select a different date. </p>
+     </Fragment>*/
     //  base case: if the new date's in the array, 
     
     
-    //display error
 
 
     //  if the new date's in the array already don't add a duplicate.
     if (!isInArray(booked_dates, appointment))
     {
         booked_dates.push(appointment.date);
+        error = false;
+        //{displayError()}
+    }
+    else if (isInArray(booked_dates, appointment))
+    {
+        error = true;
     }
     
 
@@ -95,7 +112,17 @@ function CaptureData(appointment)
 // Helper method determining if the date is already in array of dates
 function isInArray(booked_dates, appointment) 
 {
-  return (booked_dates.find(item => {return item == appointment.date}) || []).length > 0;
+  return (booked_dates.find(item => {return item === appointment.date}) || []).length > 0;
+}
+
+
+function displayError()
+{
+;
+
+   /* return(    <Fragment>
+       
+    </Fragment>)*/
 }
 
 export default Appointment;

@@ -20,6 +20,18 @@ h1, h2  {
   font-family: 'Open Sans', sans-serif;
   letter-spacing: 1px;
 }
+h3  {
+  color: black;
+  padding: 3rem 0;
+  text-align: center;
+
+  text-transform: uppercase;
+
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+}
+
+
 .list-appointments .media {
   border-bottom: 1px solid #e1e1e1;
   padding-bottom: 3rem;
@@ -91,5 +103,4 @@ input[type="time"] {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-
 } 
