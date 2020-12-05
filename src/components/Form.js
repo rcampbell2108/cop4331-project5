@@ -2,6 +2,14 @@ import React, { Fragment, useState } from "react";
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
 
+var e, result;
+
+
+/*var e = document.getElementById("ddlViewBy");
+var strUser = e.options[e.selectedIndex].text;
+duration.value = strUser;*/
+
+
 const Form = ({makeAppointment}) => {
 
     //var booked_dates = [];
@@ -10,6 +18,7 @@ const Form = ({makeAppointment}) => {
         name:'',
         date:'',
         time:'',
+        duration:'',
         notes:'',
         phone_number:'',
         email:''
@@ -26,16 +35,16 @@ const Form = ({makeAppointment}) => {
     }
 
     // extract data
-    const {reason, name, date, time, notes, phone_number, email} = appointment;
+    const {reason, name, date, time, duration, notes, phone_number, email} = appointment;
 
     // when sending/submitting Form
     const submitAppointment = e => 
     {
       e.preventDefault();
  
-      // If any of the fields are empty, set error to true
-      if(reason.trim() === '' || name.trim() === ''  || date.trim() === ''  || time.trim() === ''  || notes.trim() === ''
-          || phone_number.trim() === '' || email.trim() === '' )
+      // If any of the fields are empty, set error to true. Otherwise error is false by default to hide it
+      if(reason.trim() === '' || name.trim() === ''  || date.trim() === ''  || time.trim() === ''  || duration.trim() === '--Please choose an appointment duration--' ||
+            notes.trim() === '' || phone_number.trim() === '' || email.trim() === '')
       {
           updateError(true);
           return;
@@ -57,10 +66,10 @@ const Form = ({makeAppointment}) => {
         time:'',
         notes:'',
         phone_number:'',
+        duration:'',
         email:''
       })
     }
-
 
   return (
     <Fragment>
@@ -114,6 +123,22 @@ const Form = ({makeAppointment}) => {
           required
         />
 
+        
+        <label> Duration </label>
+        <select 
+            id="select_id" 
+
+            onChange={() => { GetSelectedText(); console.log(GetSelectedText())} }
+        > 
+
+            <option value="">--Please choose an appointment duration--</option>
+            <option value="duration">15 Minutes</option>
+            <option value="duration">30 Minutes</option>
+            <option value="duration">45 Minutes</option>
+            <option value="duration">60 Minutes</option>
+        </select>
+
+
         <label> Phone Number </label>
         <input
           type="tel"
@@ -150,7 +175,21 @@ const Form = ({makeAppointment}) => {
     </Fragment>
   );
 
+
+   function GetSelectedText()  
+   {
+        {var e = document.getElementById("select_id")}
+        {var result = e.options[e.selectedIndex]}
+        
+        //{console.log("hello")}  
+        
+        appointment.duration = result.text
+        //console.log(appointment.duration);    
+        //document.getElementById("result").innerHTML = result;
+    }
+
 };
+
 
 Form.propTypes = 
 {

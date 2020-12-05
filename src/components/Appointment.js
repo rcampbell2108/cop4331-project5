@@ -8,11 +8,9 @@ const booked_dates = [];
     const updateError = false;
 
 
+
 // this class represents the created appointment(s)
 const Appointment = ({ appointment, deletedAppointment }) => (
-    
-
-
   <div className="appointment">
 
   <Fragment>
@@ -48,6 +46,10 @@ const Appointment = ({ appointment, deletedAppointment }) => (
     <p>
       Time: <span>{appointment.time}</span>
     </p>
+
+    <p>
+      Duration: <span>{appointment.duration}</span>
+    </p>
     
     <p>
       Notes: <span>{appointment.notes}</span>
@@ -67,21 +69,13 @@ const Appointment = ({ appointment, deletedAppointment }) => (
    </div>   
 );
 
-//{booked_dates.length = 0};
-/*
-      <script>
-            {CaptureData(appointment)},
-            {date_count++}
-      </script> 
-*/
-
 Appointment.propTypes = 
 {
   appointment: PropTypes.array.isRequired,
   deletedAppointment: PropTypes.func.isRequired
 };
 
-function CaptureData(appointment) 
+function CaptureData(appointment)
 {
     
 /*<Fragment>
@@ -89,9 +83,6 @@ function CaptureData(appointment)
      </Fragment>*/
     //  base case: if the new date's in the array, 
     
-    
-
-
     //  if the new date's in the array already don't add a duplicate.
     if (!isInArray(booked_dates, appointment))
     {
@@ -118,9 +109,9 @@ function isInArray(booked_dates, appointment)
 
 function displayError()
 {
-;
-
-   /* return(    <Fragment>
+    ;
+   /* return(    
+   <Fragment>
        
     </Fragment>)*/
 }

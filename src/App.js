@@ -12,8 +12,6 @@ function App()
     initialAppointments = [];
   }
 
-
-
   // array of appointments
   const [appointments, savedAppointments] = useState(initialAppointments);
 
@@ -21,7 +19,8 @@ function App()
   useEffect(() => {
     let initialAppointments = JSON.parse(localStorage.getItem('appointments'));
 
-    if (initialAppointments) {
+    if (initialAppointments) 
+    {
       localStorage.setItem('appointments', JSON.stringify(appointments));
     } 
     else {
@@ -63,7 +62,6 @@ function App()
         
         </div>
       </div>
-
     </Fragment>
   );
 }
