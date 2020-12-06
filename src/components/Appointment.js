@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 const booked_dates = [];
 //const error
-    var error = false;
-    const updateError = false;
+var error = false;
+const updateError = false;
 
 
 
@@ -56,7 +56,7 @@ const Appointment = ({ appointment, deletedAppointment }) => (
     </p>
     
     <p>
-      APPOINTMENT ID: <span>{appointment.id}</span>
+      APPOINTMENT ID: <span>{parseID(appointment)}</span>
     </p>
 
     <button
@@ -106,14 +106,17 @@ function isInArray(booked_dates, appointment)
   return (booked_dates.find(item => {return item === appointment.date}) || []).length > 0;
 }
 
-
-function displayError()
+function displayError(appointment)
 {
     ;
-   /* return(    
-   <Fragment>
-       
-    </Fragment>)*/
 }
+
+function parseID(appointment)
+{
+    var str = String(appointment.id)
+    var result = str.substring(0,13)
+    return(result)
+}
+
 
 export default Appointment;

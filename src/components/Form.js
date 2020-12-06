@@ -128,7 +128,7 @@ const Form = ({makeAppointment}) => {
         <select 
             id="select_id" 
 
-            onChange={() => { GetSelectedText(); console.log(GetSelectedText())} }
+            onChange={() => { GetSelectedText()} }
         > 
 
             <option value="">--Please choose an appointment duration--</option>
