@@ -1,14 +1,13 @@
 import React, { Fragment, useState } from "react";
+//import ReactDOM from 'react-dom';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
 
 var e, result;
 
-
 /*var e = document.getElementById("ddlViewBy");
 var strUser = e.options[e.selectedIndex].text;
 duration.value = strUser;*/
-
 
 const Form = ({makeAppointment}) => {
 
@@ -79,7 +78,7 @@ const Form = ({makeAppointment}) => {
         error ? <p className="error-alert"> Please fill the complete form </p>: false
       } 
       <form  
-      onSubmit={submitAppointment/*, booked_dates.push(date), console.log(booked_dates)*/}
+        onSubmit={submitAppointment/*, booked_dates.push(date), console.log(booked_dates)*/}
       >
 
         <label> Name </label>
@@ -123,14 +122,11 @@ const Form = ({makeAppointment}) => {
           required
         />
 
-        
         <label> Duration </label>
         <select 
             id="select_id" 
-
             onChange={() => { GetSelectedText()} }
         > 
-
             <option value="">--Please choose an appointment duration--</option>
             <option value="duration">15 Minutes</option>
             <option value="duration">30 Minutes</option>
@@ -168,14 +164,43 @@ const Form = ({makeAppointment}) => {
           value={notes}
         ></textarea>
 
+
         <button type="submit" className="u-full-width button-primary" /*onclick={captureDate()}*/>
           Request appointment
         </button>
       </form>
     </Fragment>
+
+
+
   );
 
+      /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+    /*
+          <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <a href="#">About</a>
+          <a href="#">Services</a>
+          <a href="#">Clients</a>
+          <a href="#">Contact</a>
+      </div>
 
+      <div id="main">
+        <button onclick={openNav()}>&#9776; open</button>
+      </div>
+    function openNav() 
+    {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+     Set the width of the side navigation to 0 and the left margin of the page content to 0 
+    function closeNav()    
+    {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+    */
    function GetSelectedText()  
    {
         {var e = document.getElementById("select_id")}
@@ -188,11 +213,14 @@ const Form = ({makeAppointment}) => {
         //document.getElementById("result").innerHTML = result;
     }
 
-};
 
+
+};
 
 Form.propTypes = 
 {
   makeAppointment: PropTypes.func.isRequired
-}
+}   
+
+
 export default Form;

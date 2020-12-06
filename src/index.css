@@ -103,4 +103,11 @@ input[type="time"] {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-} 
+}
+
+.menu {
+  font-family: 'Open Sans', sans-serif;
+  background-color: white;
+}
+
+

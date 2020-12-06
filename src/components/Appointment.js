@@ -7,18 +7,19 @@ const booked_dates = [];
 var error = false;
 const updateError = false;
 
-
+//
 
 // this class represents the created appointment(s)
 const Appointment = ({ appointment, deletedAppointment }) => (
-  <div className="appointment">
-
-  <Fragment>
-    <h3> !ERROR GOES HERE! </h3>
-    {
-        error ? <p className="error-alert"> Requested appointment unavailable. Please select a different date. </p>: false
-    }
-  </Fragment>
+<body>
+  <button onclick={() => hideList()}> Click Me </button>
+  <div id="appointment_list" className="appointment">
+    <Fragment>
+      <h3> !ERROR GOES HERE! </h3>
+      {
+          error ? <p className="error-alert"> Requested appointment unavailable. Please select a different date. </p>: false
+      }
+    </Fragment>
 
     <p>
       Name: <span>{appointment.name}</span>
@@ -66,7 +67,8 @@ const Appointment = ({ appointment, deletedAppointment }) => (
       Delete &times;
 
     </button>
-   </div>   
+   </div> 
+   </body>
 );
 
 Appointment.propTypes = 
@@ -77,10 +79,6 @@ Appointment.propTypes =
 
 function CaptureData(appointment)
 {
-    
-/*<Fragment>
-     <p className="error-alert"> Requested appointment unavailable. Please select a different date. </p>
-     </Fragment>*/
     //  base case: if the new date's in the array, 
     
     //  if the new date's in the array already don't add a duplicate.
@@ -94,7 +92,6 @@ function CaptureData(appointment)
     {
         error = true;
     }
-    
 
     //booked_dates.length = date_count
     return (console.log(booked_dates));
@@ -108,6 +105,9 @@ function isInArray(booked_dates, appointment)
 
 function displayError(appointment)
 {
+/*<Fragment>
+     <p className="error-alert"> Requested appointment unavailable. Please select a different date. </p>
+</Fragment>*/
     ;
 }
 
@@ -118,5 +118,16 @@ function parseID(appointment)
     return(result)
 }
 
+function hideList() 
+{
+  var x = document.getElementById("appointment_list");
+  
+  if (x.style.display === "none") 
+  {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 
 export default Appointment;
