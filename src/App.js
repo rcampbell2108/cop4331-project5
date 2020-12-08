@@ -1,10 +1,19 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Form from "./components/Form";
 import Appointment from "./components/Appointment";
+import Owner from "./components/Owner"
+
 import Icon from "react";//awesome-react-icons";
+import ReactDOM from "react-dom";
 
 import {Navigation} from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+
+import {
+  Route,
+  NavLink,
+  HashRouter
+} from "react";
 
 function App() 
 {
@@ -48,8 +57,7 @@ function App()
 
   // Header
   return (
-  <>
-    <div className= "menu">
+    /*<div className= "menu">
     <Navigation 
             // you can use your own router's api to get pathname
             activeItemId="/management/members"
@@ -73,14 +81,14 @@ function App()
                     itemId: '/management/teams',
                   },
                 ],
-              },*/
+              },
               {
                 title: 'NAVIGATE',
                 itemId: '/navigate',
                 //elemBefore: () => <Icon name="users" />,
                 subNav: [
                   {
-                    title: 'HOME',
+                    title: <li><a href="/stuff">HOME</a></li>,
                     itemId: '/navigate/home',
                   },
                   {
@@ -91,16 +99,14 @@ function App()
                     title: 'ADMIN',
                     itemId: '/navigate/admin',
                   },
-
                 ],
               },
 
             ]}
           />
-     </div>
+     </div>*/
 
     <Fragment>
-
       <h1> Appointment System </h1>
       <div className="container">
         <div className="row">
@@ -114,11 +120,9 @@ function App()
               <Appointment key={appointment.id} appointment={appointment} deletedAppointment={deletedAppointment} />
             ))}
           </div>
-        
         </div>
       </div>
     </Fragment>
-    </>
   );
 }
 

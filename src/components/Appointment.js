@@ -1,25 +1,35 @@
 import React, {Fragment, useState} from "react";
 import PropTypes from 'prop-types';
+import Form from './Form'
+import updateError from "./Form"
+import error from "./Form"
 
+export const booked_dates = [];
 
-const booked_dates = [];
-//const error
-var error = false;
-const updateError = false;
-
-//
+/* <button onclick={() => {toggleDiv("appointment_list")}}> Show/Hide </button>
+    <h3> !ERROR GOES HERE! </h3>*/
 
 // this class represents the created appointment(s)
 const Appointment = ({ appointment, deletedAppointment }) => (
-<body>
-  <button onclick={() => hideList()}> Click Me </button>
+<>
+
   <div id="appointment_list" className="appointment">
+
     <Fragment>
-      <h3> !ERROR GOES HERE! </h3>
-      {
-          error ? <p className="error-alert"> Requested appointment unavailable. Please select a different date. </p>: false
-      }
+          <script>
+            Form.error = false;
+            Form.updateError = false;
+           </script>
+    {
+
+        error ? <p className="error-alert"> Requested appointment unavailable. Please select a different date. </p>: false
+    }
     </Fragment>
+
+    <script>
+        Form.error = false;
+        Form.updateError = false;
+    </script>
 
     <p>
       Name: <span>{appointment.name}</span>
@@ -40,7 +50,7 @@ const Appointment = ({ appointment, deletedAppointment }) => (
     <p>
       Date: <span>{appointment.date}</span>
       <script>
-            {CaptureData(appointment)}
+            {CaptureData(appointment, Form)}
       </script> 
     </p>
     
@@ -59,6 +69,40 @@ const Appointment = ({ appointment, deletedAppointment }) => (
     <p>
       APPOINTMENT ID: <span>{parseID(appointment)}</span>
     </p>
+       <div>
+        <Fragment>
+            <form>
+                <label> </label>
+                <label> Last Name: </label>
+                <input
+                  type="text"
+                  className="u-full-width"
+                  placeholder="Last Name"
+                />
+
+                <label> </label>
+                <label> Appointment ID: </label>
+                <input
+                  type="text"
+                  className="u-full-width"
+                  placeholder="ID"
+                />
+
+                <label> </label>
+                <label> New Date: </label>
+                <input
+                  type="date"
+                  className="u-full-width"
+                  placeholder="ID"
+                />
+
+            </form>
+        </Fragment>
+    </div>
+    <label>  </label>
+    <button type="submit" className="u-full-width button-primary">
+      EDIT
+    </button>
 
     <button
       className="delete button u-full-width"
@@ -68,7 +112,7 @@ const Appointment = ({ appointment, deletedAppointment }) => (
 
     </button>
    </div> 
-   </body>
+   </>
 );
 
 Appointment.propTypes = 
@@ -77,20 +121,24 @@ Appointment.propTypes =
   deletedAppointment: PropTypes.func.isRequired
 };
 
-function CaptureData(appointment)
+export function CaptureData(appointment, Form)
 {
     //  base case: if the new date's in the array, 
-    
-    //  if the new date's in the array already don't add a duplicate.
+    //  don't add a duplicate.
     if (!isInArray(booked_dates, appointment))
     {
         booked_dates.push(appointment.date);
-        error = false;
-        //{displayError()}
+        Form.error = false;
+        Form.updateError = false;
+        console.log("This date isn't in the array. Adding!");
+        return;
     }
-    else if (isInArray(booked_dates, appointment))
+    
+    if (isInArray(booked_dates, appointment))
     {
-        error = true;
+        Form.error = true;
+        Form.updateError = true;
+        console.log("This date's already in the array. Error!");
     }
 
     //booked_dates.length = date_count
@@ -98,24 +146,23 @@ function CaptureData(appointment)
 }
 
 // Helper method determining if the date is already in array of dates
-function isInArray(booked_dates, appointment) 
+export function isInArray(booked_dates, appointment) 
 {
-  return (booked_dates.find(item => {return item === appointment.date}) || []).length > 0;
+    return (booked_dates.find(item => {return item === appointment.date}) || []).length > 0;
 }
 
-function displayError(appointment)
-{
-/*<Fragment>
-     <p className="error-alert"> Requested appointment unavailable. Please select a different date. </p>
-</Fragment>*/
-    ;
-}
 
 function parseID(appointment)
 {
     var str = String(appointment.id)
     var result = str.substring(0,13)
     return(result)
+}
+
+function toggleDiv(id) 
+{
+    var div = document.getElementById(id);
+    div.style.display = div.style.display === "none" ? "block" : "none";
 }
 
 function hideList() 

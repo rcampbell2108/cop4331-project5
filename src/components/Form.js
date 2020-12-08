@@ -2,6 +2,12 @@ import React, { Fragment, useState } from "react";
 //import ReactDOM from 'react-dom';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
+import Appointment from "./Appointment";
+
+//import 
+import {booked_dates} from "./Appointment"
+import {CaptureData} from "./Appointment"
+import {isInArray} from "./Appointment"
 
 var e, result;
 
@@ -9,9 +15,14 @@ var e, result;
 var strUser = e.options[e.selectedIndex].text;
 duration.value = strUser;*/
 
-const Form = ({makeAppointment}) => {
+/*export const error = useState(false)
+export const updateError = useState(false)*/
 
-    //var booked_dates = [];
+export const Form = ({makeAppointment, Appointment}) => {
+
+const booked_dates_form = [];
+    
+    //  Var booked_dates = [];
     const[appointment, updatedAppointment] = useState ({
         reason:'',
         name:'',
@@ -25,7 +36,7 @@ const Form = ({makeAppointment}) => {
 
     const [error, updateError] = useState(false)
 
-    // to read the content and put it in the state
+    //  To read the content and put it in the state
     const updateState = e  => { 
         updatedAppointment({
             ...appointment,
@@ -33,15 +44,15 @@ const Form = ({makeAppointment}) => {
         })
     }
 
-    // extract data
+    //  extract data
     const {reason, name, date, time, duration, notes, phone_number, email} = appointment;
 
-    // when sending/submitting Form
+    //  when sending/submitting Form
     const submitAppointment = e => 
     {
       e.preventDefault();
- 
-      // If any of the fields are empty, set error to true. Otherwise error is false by default to hide it
+
+      //    If any of the fields are empty, set error to true. Otherwise error is false by default to hide it
       if(reason.trim() === '' || name.trim() === ''  || date.trim() === ''  || time.trim() === ''  || duration.trim() === '--Please choose an appointment duration--' ||
             notes.trim() === '' || phone_number.trim() === '' || email.trim() === '')
       {
@@ -54,7 +65,7 @@ const Form = ({makeAppointment}) => {
       // generate ID
       appointment.id = uuid();
       
-      //create appointment
+      // create appointment
       makeAppointment(appointment);
       
       // restart form
@@ -66,7 +77,7 @@ const Form = ({makeAppointment}) => {
         notes:'',
         phone_number:'',
         duration:'',
-        email:''
+        email:''    
       })
     }
 
@@ -75,12 +86,11 @@ const Form = ({makeAppointment}) => {
       <h1> Appointment Request </h1>
       {
         //  Every field on the form is mandatory. If a field is empty, display an error
-        error ? <p className="error-alert"> Please fill the complete form </p>: false
+        error ? <p className="error-alert"> ERROR: Please fill the complete form </p>: false
       } 
       <form  
         onSubmit={submitAppointment/*, booked_dates.push(date), console.log(booked_dates)*/}
       >
-
         <label> Name </label>
         <input
           type="text"
@@ -107,7 +117,7 @@ const Form = ({makeAppointment}) => {
           name="date"
           className="u-full-width"
           onChange={updateState}
-          value={date}
+          value={date} 
         />
 
         <label> Time </label>
@@ -118,8 +128,7 @@ const Form = ({makeAppointment}) => {
           onChange={updateState}
           value={time}
           min="09:00" 
-          max="17:00" 
-          required
+          max="17:00" required
         />
 
         <label> Duration </label>
@@ -164,16 +173,120 @@ const Form = ({makeAppointment}) => {
           value={notes}
         ></textarea>
 
-
-        <button type="submit" className="u-full-width button-primary" /*onclick={captureDate()}*/>
+        <button 
+            type="submit" 
+            className="u-full-width button-primary" /*onclick={captureDate()}*/
+            onClick={() => {booked_dates_form.length = 0}}>
           Request appointment
         </button>
-      </form>
+    </form>
     </Fragment>
+ );
 
+ /*<script>       
+    {CaptureData(appointment)}
+    {console.log(booked_dates_form + 'form meow')}
+</script>*/
 
+/*function 
+    if (isInArray(booked_dates, appointment)) 
+    {
+        updateError(true);
+        return;
+    }
+*/
 
-  );
+/*function CaptureData(appointment)
+{
+    //  base case: if the new date's in the array, 
+    
+    //  if the new date's in the array already don't add a duplicate.
+    if (!isInArray(booked_dates_form, appointment))
+    {
+        booked_dates_form.push(appointment.date);
+       // updateError(true);
+    }else if (isInArray(booked_dates_form, appointment)) {
+        updateError(true);
+        return;
+    }
+    //booked_dates.length = date_count
+    return (console.log(booked_dates_form + 'form meow'));
+}*/
+
+// Helper method determining if the date is already in array of dates
+function isInArray(booked_dates_form, date) 
+{
+   return (booked_dates_form.find(item => {return item === date}) || []).length > 0;
+}
+   function GetSelectedText()  
+   {
+        {var e = document.getElementById("select_id")}
+        {var result = e.options[e.selectedIndex]}
+                
+        //{console.log("hello")}  
+        
+        appointment.duration = result.text
+        //console.log(appointment.duration);    
+        //document.getElementById("result").innerHTML = result;
+    }
+};
+
+Form.propTypes = 
+{
+  makeAppointment: PropTypes.func.isRequired
+}   
+
+export default Form;
+
+   /* <label>  </label>
+    <label>  </label>
+    <label for="username">Admin Username:</label>
+    <input 
+        type="text" 
+        id="username" 
+        name="username"/>
+
+    <label for="pass">Admin Password (8 characters minimum):</label>
+    <input 
+        type="password" 
+        className="u-full-width"
+        id="pass" 
+        name="password"
+        minlength="8" required/>
+
+    // ***SITE OWNER***        
+    <label>  </label>
+    <button type="submit" className="u-full-width button-primary" onclick={captureDate()}>
+        Owner Signin
+    </button>
+
+        <label> </label>
+        <label> Last Name </label>
+        <input
+          type="text"
+          name="name"
+          className="u-full-width"
+          placeholder="Last Name"
+          onChange={updateState}
+          value={name}
+        />
+
+        <label> </label>
+        <label> Appointment ID: </label>
+        <input
+          type="text"
+          name="name"
+          className="u-full-width"
+          placeholder="ID"
+          onChange={updateState}
+          value={name}
+        />
+
+    <label>  </label>
+    <button type="submit" className="u-full-width button-primary">
+        Edit/Delete Appointment
+    </button>*/
+
 
       /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
     /*
@@ -201,26 +314,3 @@ const Form = ({makeAppointment}) => {
         document.getElementById("main").style.marginLeft = "0";
     }
     */
-   function GetSelectedText()  
-   {
-        {var e = document.getElementById("select_id")}
-        {var result = e.options[e.selectedIndex]}
-        
-        //{console.log("hello")}  
-        
-        appointment.duration = result.text
-        //console.log(appointment.duration);    
-        //document.getElementById("result").innerHTML = result;
-    }
-
-
-
-};
-
-Form.propTypes = 
-{
-  makeAppointment: PropTypes.func.isRequired
-}   
-
-
-export default Form;
