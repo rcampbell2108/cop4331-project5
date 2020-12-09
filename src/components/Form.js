@@ -8,17 +8,14 @@ import Appointment from "./Appointment";
 import {booked_dates} from "./Appointment"
 import {CaptureData} from "./Appointment"
 import {isInArray} from "./Appointment"
+import dup_error from "./Appointment"
 
 var e, result;
-
-/*var e = document.getElementById("ddlViewBy");
-var strUser = e.options[e.selectedIndex].text;
-duration.value = strUser;*/
 
 /*export const error = useState(false)
 export const updateError = useState(false)*/
 
-export const Form = ({makeAppointment, Appointment}) => {
+export const Form = ({makeAppointment}) => {
 
 const booked_dates_form = [];
     
@@ -35,6 +32,7 @@ const booked_dates_form = [];
     });
 
     const [error, updateError] = useState(false)
+    const [duplicate_error, updateDuplicateError] = useState(false)
 
     //  To read the content and put it in the state
     const updateState = e  => { 
@@ -44,10 +42,10 @@ const booked_dates_form = [];
         })
     }
 
-    //  extract data
+    //  Extract data
     const {reason, name, date, time, duration, notes, phone_number, email} = appointment;
 
-    //  when sending/submitting Form
+    //  When sending/submitting Form
     const submitAppointment = e => 
     {
       e.preventDefault();
@@ -56,10 +54,19 @@ const booked_dates_form = [];
       if(reason.trim() === '' || name.trim() === ''  || date.trim() === ''  || time.trim() === ''  || duration.trim() === '--Please choose an appointment duration--' ||
             notes.trim() === '' || phone_number.trim() === '' || email.trim() === '')
       {
+          console.log('unfilled forms')
           updateError(true);
           return;
       }
-
+     
+     //     If the error is dup_error = false;
+     if (CaptureData(appointment, Form) === true)
+     {
+        console.log('dup_error is true');
+        updateDuplicateError(true);
+        return;
+     }
+      updateDuplicateError(false)
       updateError(false);
 
       // generate ID
@@ -87,6 +94,10 @@ const booked_dates_form = [];
       {
         //  Every field on the form is mandatory. If a field is empty, display an error
         error ? <p className="error-alert"> ERROR: Please fill the complete form </p>: false
+      } 
+      {
+        //  Every field on the form is mandatory. If a field is empty, display an error
+        duplicate_error ? <p className="error-alert"> ERROR: Duplicate. Please select a different date </p>: false
       } 
       <form  
         onSubmit={submitAppointment/*, booked_dates.push(date), console.log(booked_dates)*/}
@@ -176,7 +187,7 @@ const booked_dates_form = [];
         <button 
             type="submit" 
             className="u-full-width button-primary" /*onclick={captureDate()}*/
-            onClick={() => {booked_dates_form.length = 0}}>
+            /*onClick={() => {booked_dates_form.length = 0}}*/>
           Request appointment
         </button>
     </form>

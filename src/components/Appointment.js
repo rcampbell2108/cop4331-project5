@@ -5,25 +5,21 @@ import updateError from "./Form"
 import error from "./Form"
 
 export const booked_dates = [];
+export var dup_error = false;
 
 /* <button onclick={() => {toggleDiv("appointment_list")}}> Show/Hide </button>
     <h3> !ERROR GOES HERE! </h3>*/
 
-// this class represents the created appointment(s)
+//  This class represents the created appointment(s)
 const Appointment = ({ appointment, deletedAppointment }) => (
 <>
-
   <div id="appointment_list" className="appointment">
-
+    
     <Fragment>
           <script>
             Form.error = false;
             Form.updateError = false;
            </script>
-    {
-
-        error ? <p className="error-alert"> Requested appointment unavailable. Please select a different date. </p>: false
-    }
     </Fragment>
 
     <script>
@@ -123,26 +119,26 @@ Appointment.propTypes =
 
 export function CaptureData(appointment, Form)
 {
+    //  dup_error = false;
     //  base case: if the new date's in the array, 
     //  don't add a duplicate.
     if (!isInArray(booked_dates, appointment))
     {
         booked_dates.push(appointment.date);
-        Form.error = false;
-        Form.updateError = false;
+        dup_error = false;
         console.log("This date isn't in the array. Adding!");
-        return;
     }
-    
-    if (isInArray(booked_dates, appointment))
+    else if (isInArray(booked_dates, appointment))
     {
-        Form.error = true;
-        Form.updateError = true;
+        dup_error = true;
         console.log("This date's already in the array. Error!");
     }
 
-    //booked_dates.length = date_count
-    return (console.log(booked_dates));
+    //console.log(dup_error)
+    //console.log(booked_dates)
+
+    //  Return the bool tracking duplicate dates
+    return (dup_error);
 }
 
 // Helper method determining if the date is already in array of dates
@@ -150,7 +146,6 @@ export function isInArray(booked_dates, appointment)
 {
     return (booked_dates.find(item => {return item === appointment.date}) || []).length > 0;
 }
-
 
 function parseID(appointment)
 {
