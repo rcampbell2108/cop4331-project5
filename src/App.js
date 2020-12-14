@@ -8,12 +8,6 @@ import React, { Fragment, useState, useEffect } from "react";
 import Form from "./components/Form";
 import Appointment from "./components/Appointment";
 
-import Icon from "react";
-import ReactDOM from "react-dom";
-
-import {Navigation} from 'react-minimal-side-navigation';
-import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
-
 //  This function drives the app
 function App() 
 {
@@ -25,7 +19,7 @@ function App()
   }
 
   //    array of appointments
-  const [appointments, savedAppointments] = useState(initial_appointments);
+  const [appointments, saved_appointments] = useState(initial_appointments);
 
   //    useEffect does operations when the state changes
   useEffect(() => {
@@ -41,14 +35,15 @@ function App()
 
   }, [appointments]);
 
-  //    Function to take appointment and add new
+  //    Add new appointment
   const created_appointment = appointment => {
-    savedAppointments([...appointments, appointment]);
+    saved_appointments([...appointments, appointment]);
   };
 
+    //   Remove an appointment
   const deleted_appointment = id => {
-    const newAppointments = appointments.filter(appointment => appointment.id !== id );
-    savedAppointments(newAppointments);
+    const new_appointments = appointments.filter(appointment => appointment.id !== id );
+    saved_appointments(new_appointments);
   }
 
   const title =

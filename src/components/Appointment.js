@@ -66,7 +66,7 @@ const Appointment = ({ appointment, deleted_appointment }) => (
 
         <button
           className="delete button u-full-width"
-          onClick={() => {deleted_appointment(appointment.id); booked_dates.length = 0} }
+          onClick={() => {deleted_appointment(appointment.id); booked_dates.length = 0}}
         >
           Delete &times;
 
