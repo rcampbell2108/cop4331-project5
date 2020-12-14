@@ -14,7 +14,7 @@ Git Bash - https://git-scm.com/download/win
 	
 3. Clone from Github. 
 	1. =====Git Bash===== 
-	1. **$ git clone h.ps://github.com/brennenfountain6/cop4331c-chat-app-server.git**
+	1. **$ git clone https://github.com/rcampbell2108/cop4331-project5.git**
 
 
 # Run the Web App: 
