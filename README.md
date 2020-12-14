@@ -6,25 +6,25 @@ Git Bash - https://git-scm.com/download/win
 
 # Build Instructions: 
 
-1. Clone from Github. 
-	=====Git Bash===== 
-	$ git clone h.ps://github.com/brennenfountain6/cop4331c-chat-app-server.git 
+1. Download Node.js 
+	1. https://git-scm.com/download/win
 
-2. Download Node.js 
-	https://git-scm.com/download/win
-
-3. Download Git Bash 
-	https://git-scm.com/download/win 
+2. Download Git Bash 
+	1. https://git-scm.com/download/win 
+	
+3. Clone from Github. 
+	1. =====Git Bash===== 
+	1. **$ git clone h.ps://github.com/brennenfountain6/cop4331c-chat-app-server.git**
 
 
 # Run the Web App: 
 1. Navigate to local repository 
-	=====Command Prompt===== 
-	~\> cd cop4331-project5
+	1. =====Command Prompt===== 
+	1. **~\> cd cop4331-project5**
 2. Install packages
-	=====Command Prompt===== 
-	~\> npm i
+	1. =====Command Prompt===== 
+	1. **~\> npm i**
 3. Start the web application
-	=====Command Prompt===== 
-	~\> npm start
+	1. =====Command Prompt===== 
+	1. **~\> npm start**
 
